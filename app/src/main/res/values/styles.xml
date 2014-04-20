@@ -1,0 +1,68 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/AppActionBarStyle</item>
+    </style>
+
+    <style name="AppActionBarStyle" parent="android:Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/AppActionBarStyle.TitleTextStyle</item>
+    </style>
+
+    <style name="AppActionBarStyle.TitleTextStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="ReaderTextView" parent="android:Widget.TextView">
+        <item name="android:textColorLink">@color/reader_hyperlink</item>
+    </style>
+
+    <!-- ListViews -->
+    <style name="ReaderListView">
+        <item name="android:scrollbars">none</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:drawSelectorOnTop">true</item>
+        <item name="android:listSelector">@drawable/reader_list_selector</item>
+    </style>
+
+    <style name="ReaderListView.PostList" parent="ReaderListView">
+        <item name="android:listSelector">@color/transparent</item>
+        <item name="android:drawSelectorOnTop">false</item>
+    </style>
+
+    <style name="ReaderListView.EmptyList" parent="ReaderListView">
+        <item name="android:textSize">@dimen/text_sz_large</item>
+    </style>
+
+    <style name="ReaderImageView" />
+
+    <style name="ReaderTextView.Post.Title" parent="ReaderTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_sz_extra_large</item>
+        <item name="android:textColor">@color/grey_dark</item>
+        <item name="android:maxLines">3</item>
+    </style>
+
+    <style name="ReaderTextView.Post.Excerpt" parent="ReaderTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_sz_medium</item>
+        <item name="android:textColor">@color/grey_dark</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+        <item name="android:maxLines">4</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ReaderTextView.Date" parent="ReaderTextView">
+        <item name="android:textSize">@dimen/text_sz_small</item>
+        <item name="android:textColor">@color/grey_medium</item>
+        <item name="android:drawableLeft">@drawable/noticon_clock</item>
+    </style>
+
+    <style name="ReaderImageView.ButtonIcon" parent="ReaderImageView">
+        <item name="android:layout_width">@dimen/reader_button_icon_small</item>
+        <item name="android:layout_height">@dimen/reader_button_icon_small</item>
+    </style>
+</resources>
