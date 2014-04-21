@@ -1,14 +1,14 @@
 package info.suvaya.onestock.app;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.widget.SearchView;
 
 public class StockQueryTextListener implements SearchView.OnQueryTextListener {
-    NewsListFragment fragment;
+    NewsListFragment newsListFragment;
+    ChartFragment chartFragment;
 
-    public StockQueryTextListener(NewsListFragment fragment) {
-        this.fragment = fragment;
+    public StockQueryTextListener(NewsListFragment newsListFragment, ChartFragment chartFragment) {
+        this.newsListFragment = newsListFragment;
+        this.chartFragment = chartFragment;
     }
 
     public boolean onQueryTextChange(String newText) {
@@ -17,18 +17,13 @@ public class StockQueryTextListener implements SearchView.OnQueryTextListener {
 
     public boolean onQueryTextSubmit(String query) {
         try {
-            SharedPreferences sharedPref = fragment.getActivity().getPreferences(Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
+            ((OneStockApplication) newsListFragment.getActivity().getApplication()).setStockSymbol(query);
 
-            if (query.substring(0, 1).equalsIgnoreCase("$")) {
-                query = query.substring(1, query.length());
-            }
-            editor.putString(fragment.getString(R.string.stock_symbol_name), query);
-            editor.commit();
+            newsListFragment.RefreshNewsFeed();
+            chartFragment.RefreshChart();
+
         } catch (Exception e) {
         }
-
-        fragment.RefreshNewsFeed(query);
 
         return false;
     }

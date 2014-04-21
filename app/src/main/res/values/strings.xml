@@ -6,9 +6,12 @@
     <string name="action_search">Search</string>
     <string name="action_refresh">Refresh</string>
 
-    <string name="empty_news_message">Oops. something is fishy here.\nAre you sure the stock symbol is correct?</string>
+    <string name="empty_news_message">Loading..</string>
     <string name="stock_symbol_name">stock_symbol_name</string>
     <string name="default_stock_symbol">fb</string>
     <string name="yahoo_feed_url">http://feeds.finance.yahoo.com/rss/2.0/headline?region=US%26s=</string>
     <string name="yahoo_news_item_to_avoid">Yahoo! Finance: RSS feed not found</string>
+
+    <string name="candle_stick_chart_url">file:///android_asset/CandleStickChart.html</string>
+    <!--<string name="candle_stick_chart_url2">https://googledrive.com/host/0B4wuiEhBV1R2UG9oM1E1cEwtUmM/CandleStickChart.html</string>-->
 </resources>

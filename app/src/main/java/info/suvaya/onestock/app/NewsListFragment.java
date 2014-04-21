@@ -33,8 +33,7 @@ public class NewsListFragment extends ListFragment {
     }
 
     public static NewsListFragment newInstance() {
-        NewsListFragment fragment = new NewsListFragment();
-        return fragment;
+        return new NewsListFragment();
     }
 
     @Override
@@ -47,7 +46,7 @@ public class NewsListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        RefreshNewsFeed(null);
+        RefreshNewsFeed();
     }
 
     public void handleState(INewsLoader newsLoader, int state) {
@@ -55,11 +54,9 @@ public class NewsListFragment extends ListFragment {
         completeMessage.sendToTarget();
     }
 
-    public void RefreshNewsFeed(String stock_symbol) {
+    public void RefreshNewsFeed() {
         try {
-            if (stock_symbol == null || stock_symbol.isEmpty()) {
-                stock_symbol = getStockSymbolFromStorage();
-            }
+            String stock_symbol = ((OneStockApplication) this.getActivity().getApplication()).getStockSymbol();
 
             String yahoo_feed_url = URLDecoder.decode(getString(R.string.yahoo_feed_url) + stock_symbol, "UTF-8");
 
@@ -78,16 +75,5 @@ public class NewsListFragment extends ListFragment {
         startActivity(browserIntent);
     }
 
-    private String getStockSymbolFromStorage() {
-        try {
-            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-            String default_stock_symbol = getString(R.string.default_stock_symbol);
-            String stock_symbol_name = getString(R.string.stock_symbol_name);
 
-            return sharedPref.getString(stock_symbol_name, default_stock_symbol);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }

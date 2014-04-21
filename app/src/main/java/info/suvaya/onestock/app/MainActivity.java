@@ -3,6 +3,8 @@ package info.suvaya.onestock.app;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -29,6 +31,24 @@ public class MainActivity extends Activity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
     }
 
+    private String getStockSymbol() {
+        String stock_symbol = ((OneStockApplication) getApplication()).getStockSymbol();
+        if (stock_symbol == null || stock_symbol.isEmpty()) {
+            try {
+                SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+                String default_stock_symbol = getString(R.string.default_stock_symbol);
+                String stock_symbol_name = getString(R.string.stock_symbol_name);
+
+                return sharedPref.getString(stock_symbol_name, default_stock_symbol);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        return stock_symbol;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_action_buttons, menu);
@@ -45,7 +65,7 @@ public class MainActivity extends Activity {
         mSearchView.setQueryHint("Enter Stock Symbol");
 
         try {
-            mSearchView.setOnQueryTextListener(new StockQueryTextListener(newsListFragment));
+            mSearchView.setOnQueryTextListener(new StockQueryTextListener(newsListFragment, chartFragment));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,13 +77,14 @@ public class MainActivity extends Activity {
         if (id == R.id.action_search) {
             return true;
         } else if (id == R.id.action_refresh) {
-            newsListFragment.RefreshNewsFeed(null);
+            newsListFragment.RefreshNewsFeed();
+            chartFragment.RefreshChart();
         }
         return super.onOptionsItemSelected(item);
     }
 
     NewsListFragment newsListFragment;
-    DataFragment dataFragment;
+    ChartFragment chartFragment;
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -77,8 +98,8 @@ public class MainActivity extends Activity {
                 newsListFragment = NewsListFragment.newInstance();
                 return newsListFragment;
             } else {
-                dataFragment = DataFragment.newInstance();
-                return dataFragment;
+                chartFragment = ChartFragment.newInstance();
+                return chartFragment;
             }
         }
 
