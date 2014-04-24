@@ -12,8 +12,8 @@ import android.webkit.WebViewClient;
 public class AppWebViewClient extends WebViewClient {
     Context context;
 
-    public AppWebViewClient(Context context){
-    this.context = context;
+    public AppWebViewClient(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -28,4 +28,15 @@ public class AppWebViewClient extends WebViewClient {
 
         return true;
     }
+
+    @Override
+    public void onLoadResource (WebView view, String url) {
+        if(view.getHitTestResult() != null &&
+                (view.getHitTestResult().getType() == WebView.HitTestResult.SRC_ANCHOR_TYPE ||
+                        view.getHitTestResult().getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE)){
+            view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+            view.stopLoading();
+        }
+    }
+
 }

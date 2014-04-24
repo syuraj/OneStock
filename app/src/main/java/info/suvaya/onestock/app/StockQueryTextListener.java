@@ -3,12 +3,10 @@ package info.suvaya.onestock.app;
 import android.widget.SearchView;
 
 public class StockQueryTextListener implements SearchView.OnQueryTextListener {
-    NewsListFragment newsListFragment;
-    ChartFragment chartFragment;
+    MainActivity activity;
 
-    public StockQueryTextListener(NewsListFragment newsListFragment, ChartFragment chartFragment) {
-        this.newsListFragment = newsListFragment;
-        this.chartFragment = chartFragment;
+    public StockQueryTextListener(MainActivity activity) {
+        this.activity = activity;
     }
 
     public boolean onQueryTextChange(String newText) {
@@ -17,10 +15,9 @@ public class StockQueryTextListener implements SearchView.OnQueryTextListener {
 
     public boolean onQueryTextSubmit(String query) {
         try {
-            ((OneStockApplication) newsListFragment.getActivity().getApplication()).setStockSymbol(query);
+            ((OneStockApplication) activity.getApplication()).setStockSymbol(query);
 
-            newsListFragment.RefreshNewsFeed();
-            chartFragment.RefreshChart();
+            activity.Refresh();
 
         } catch (Exception e) {
         }

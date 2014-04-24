@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">OneStock</string>
     <string name="title_section1">News</string>
-    <string name="title_section2">Data</string>
+    <string name="title_section2">Chart</string>
+    <string name="title_section3">StockTwits</string>
     <string name="action_search">Search</string>
     <string name="action_refresh">Refresh</string>
 
@@ -14,4 +15,6 @@
 
     <string name="candle_stick_chart_url">file:///android_asset/CandleStickChart.html</string>
     <!--<string name="candle_stick_chart_url2">https://googledrive.com/host/0B4wuiEhBV1R2UG9oM1E1cEwtUmM/CandleStickChart.html</string>-->
+
+    <string name="stocktwits_stream_url">file:///android_asset/StockTwits.html</string>
 </resources>

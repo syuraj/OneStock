@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.webkit.JavascriptInterface;
 
 
-public class CandleStickChartJavaScriptInterface {
+public class StockSymbolJavaScriptInterface {
     Activity activity;
 
-    CandleStickChartJavaScriptInterface(Activity activity) {
+    StockSymbolJavaScriptInterface(Activity activity) {
         this.activity = activity;
     }
 
